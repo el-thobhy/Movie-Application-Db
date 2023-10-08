@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Movie Applicatio DB</string>
+    <string name="nama_item">Nama Item</string>
+    <string name="image_movie">Keterangan</string>
 </resources>

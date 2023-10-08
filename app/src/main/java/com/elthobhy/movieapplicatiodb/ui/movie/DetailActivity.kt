@@ -1,11 +1,12 @@
-package com.elthobhy.movieapplicatiodb
+package com.elthobhy.movieapplicatiodb.ui.movie
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.elthobhy.movieapplicatiodb.R
 
-class MainActivity : AppCompatActivity() {
+class DetailActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.activity_detail)
     }
 }
