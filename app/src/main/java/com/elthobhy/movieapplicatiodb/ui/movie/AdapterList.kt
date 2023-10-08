@@ -71,7 +71,6 @@ class AdapterList : Adapter<AdapterList.ViewHolder>() {
                     .placeholder(R.drawable.ic_baseline_broken_image_24)
                     .into(roundImage)
 
-                tvOriginalTitle.text = item.original_title
                 tvOverview.text = item.overview
                 itemView.setOnClickListener {
                     onItemClickCallback.onItemClicked(item)

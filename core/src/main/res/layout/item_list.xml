@@ -30,18 +30,6 @@
         app:layout_constraintTop_toBottomOf="@id/title" />
 
     <TextView
-        android:id="@+id/tv_original_title"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="10dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginStart="16dp"
-        android:fontFamily="@font/poppins_bold"
-        android:text="@string/original_title"
-        android:textSize="12sp"
-        app:layout_constraintTop_toBottomOf="@id/poster_image" />
-
-    <TextView
         android:id="@+id/tv_overview"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -49,15 +37,15 @@
         android:maxLines="2"
         android:paddingBottom="16dp"
         android:paddingEnd="16dp"
-        android:paddingStart="0dp"
+        android:paddingStart="16dp"
         android:paddingTop="10dp"
         android:text="@string/lorem"
         android:textColor="@android:color/darker_gray"
         android:textSize="11sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@id/tv_original_title"
-        app:layout_constraintStart_toStartOf="@id/tv_original_title"
-        app:layout_constraintTop_toBottomOf="@id/tv_original_title" />
+        app:layout_constraintEnd_toEndOf="@id/poster_image"
+        app:layout_constraintStart_toStartOf="@id/poster_image"
+        app:layout_constraintTop_toBottomOf="@id/poster_image" />
 
     <TextView
         android:id="@+id/title"
@@ -79,7 +67,7 @@
         android:layout_marginTop="16dp"
         android:contentDescription="@string/image_poster"
         tools:src="@tools:sample/avatars"
-        app:layout_constraintBottom_toTopOf="@+id/tv_original_title"
+        app:layout_constraintBottom_toTopOf="@+id/tv_overview"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/round_image" />

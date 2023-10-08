@@ -1,5 +1,6 @@
 package com.elthobhy.movieapplicationdb.core.data
 
+import android.net.ConnectivityManager
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.map
 import com.elthobhy.movieapplicationdb.core.data.local.LocalDataSource
@@ -14,19 +15,21 @@ import com.elthobhy.movieapplicationdb.core.utils.DataMapper
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 
+@Suppress("DEPRECATION")
 class Repository(
     private val localDataSource: LocalDataSource,
     private val remoteDataSource: RemoteDataSource,
     private val appExecutors: AppExecutors
 ) : RepositoryInterface {
-    override fun getMovies(): Flow<Resource<List<DomainModel>>> =
+    override fun getMovies(cm: ConnectivityManager): Flow<Resource<List<DomainModel>>> =
         object : NetworkBoundResource<List<DomainModel>, List<MovieResponseItem>>() {
             override fun loadFromDB(): Flow<List<DomainModel>> {
                 return localDataSource.getMovies().map { DataMapper.mapEntityToDomain(it) }
             }
 
             override fun shouldFetch(data: List<DomainModel>?): Boolean {
-                return data == null || data.isEmpty()
+                val infoNet = cm.activeNetworkInfo != null && cm.activeNetworkInfo?.isConnected == true
+                return data.isNullOrEmpty() || infoNet
             }
 
             override suspend fun createCall(): Flow<ApiResponse<List<MovieResponseItem>>> {

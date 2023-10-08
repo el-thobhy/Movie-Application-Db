@@ -1,5 +1,6 @@
 package com.elthobhy.movieapplicatiodb.di
 
+import com.elthobhy.movieapplicatiodb.ui.detail.DetailViewModel
 import com.elthobhy.movieapplicatiodb.ui.movie.MovieViewModel
 import com.elthobhy.movieapplicationdb.core.domain.usecase.RepositoryInteract
 import com.elthobhy.movieapplicationdb.core.domain.usecase.UseCase
@@ -13,4 +14,5 @@ val useCase = module {
 
 val viewModel = module {
     viewModel { MovieViewModel(get()) }
+    viewModel { DetailViewModel(get()) }
 }
