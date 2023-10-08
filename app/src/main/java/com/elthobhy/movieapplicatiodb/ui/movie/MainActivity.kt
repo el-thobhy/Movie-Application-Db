@@ -6,8 +6,10 @@ import android.net.ConnectivityManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.elthobhy.movieapplicatiodb.R
 import com.elthobhy.movieapplicatiodb.databinding.ActivityMainBinding
 import com.elthobhy.movieapplicatiodb.ui.detail.DetailActivity
 import com.elthobhy.movieapplicatiodb.utils.showDialogError
@@ -22,19 +24,32 @@ class MainActivity : AppCompatActivity() {
     private lateinit var adapterMovie: AdapterList
     private val viewModelMovie: MovieViewModel by viewModel()
     private lateinit var dialogError: AlertDialog
+    private lateinit var cm: ConnectivityManager
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding=ActivityMainBinding.inflate(layoutInflater)
+        cm = getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
         adapterMovie= AdapterList()
         setContentView(binding.root)
         dialogError = showDialogError(this)
+        checkConnection(cm)
         showRv()
         getData()
     }
 
+    @Suppress("DEPRECATION")
+    private fun checkConnection(cm: ConnectivityManager) {
+        val infoNet = cm.activeNetworkInfo == null && cm.activeNetworkInfo?.isConnected != true
+        if(infoNet){
+            dialogError=showDialogError(this, getString(R.string.you_are_offline))
+            dialogError.show()
+        }else{
+            Toast.makeText(this, getString(R.string.online),Toast.LENGTH_LONG).show()
+        }
+    }
+
     private fun getData() {
-        val cm: ConnectivityManager = getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
         viewModelMovie.getMovies(cm).observe(this){
             when(it){
                 is Resource.Loading -> {}
@@ -68,5 +83,15 @@ class MainActivity : AppCompatActivity() {
         val intent = Intent(this, DetailActivity::class.java)
         intent.putExtra(Constants.DATA, data)
         startActivity(intent)
+    }
+
+    override fun onStop() {
+        super.onStop()
+        dialogError.dismiss()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        dialogError.dismiss()
     }
 }

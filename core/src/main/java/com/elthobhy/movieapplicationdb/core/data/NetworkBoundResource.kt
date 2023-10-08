@@ -17,15 +17,14 @@ abstract class NetworkBoundResource<ResultType, RequestType> {
                     emitAll(loadFromDB().map { Resource.Success(it) })
                 }
                 is ApiResponse.Empty -> {
-                    emitAll(loadFromDB().map { Resource.Success(it) })
+                    emitAll(loadFromDB().map { Resource.Error("Data is Empty") })
                 }
                 is ApiResponse.Error -> {
                     onFetchFailed()
-                    emit(Resource.Error(apiResponse.errorMessage + "\n| OFFLINE MODE |" + "\n| Check Your Internet Connection |"))
+                    emit(Resource.Error(apiResponse.errorMessage + "\n| Fail Fetch Data |" + "\n| Check Your Internet Connection |"))
                 }
             }
         } else {
-            emit(Resource.Error("\n| OFFLINE MODE |" + "\n| Check Your Internet Connection |"))
             emitAll(loadFromDB().map { Resource.Success(it) })
         }
     }

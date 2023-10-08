@@ -7,4 +7,6 @@
     <string name="fab_favorite">Fab Favorite</string>
     <string name="image_backdrop">Image Backdrop</string>
     <string name="detail">Detail</string>
+    <string name="you_are_offline">You are Offline</string>
+    <string name="online">Online</string>
 </resources>
