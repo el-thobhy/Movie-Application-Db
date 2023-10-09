@@ -7,8 +7,8 @@ import kotlinx.parcelize.Parcelize
 data class DomainModel(
     var overview: String? = null,
     var originalLanguage: String? = null,
-    var original_title: String? = null,
-    var backdrop_path: String? = null,
+    var originalTitle: String? = null,
+    var backdropPath: String? = null,
     var releaseDate: String? = null,
     var popularity: Double? = null,
     var voteAverage: Double? = null,

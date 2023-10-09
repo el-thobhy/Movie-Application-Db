@@ -2,11 +2,10 @@ package com.elthobhy.movieapplicatiodb.ui.splash
 
 import android.annotation.SuppressLint
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
-import com.elthobhy.movieapplicatiodb.R
+import androidx.appcompat.app.AppCompatActivity
 import com.elthobhy.movieapplicatiodb.databinding.ActivitySplashBinding
 import com.elthobhy.movieapplicatiodb.ui.movie.MainActivity
 import com.elthobhy.movieapplicationdb.core.utils.Constants

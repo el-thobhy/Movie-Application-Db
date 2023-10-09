@@ -5,13 +5,12 @@ import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
 import android.net.ConnectivityManager
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
-import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -38,9 +37,8 @@ class MainActivity : AppCompatActivity() {
         override fun onReceive(p0: Context?, p1: Intent?) {
             lifecycleScope.launch {
                 viewModelMovie.delete()
-                Log.e("TAG check", "onReceive: database deleted" )
             }
-            Snackbar.make(binding.root,"Old Data Have Been Deleted. New Data is Available, Click Load if data isn't showing",
+            Snackbar.make(binding.root, getString(R.string.pesan_snackbar),
                 Snackbar.LENGTH_LONG).setAction("Load") {
                 getData()
                 Toast.makeText(this@MainActivity, "Data Loaded", Toast.LENGTH_LONG).show()
@@ -84,7 +82,6 @@ class MainActivity : AppCompatActivity() {
                 is Resource.Loading -> {}
                 is Resource.Success -> {
                     adapterMovie.setData(it.data)
-                    Log.e("data nya", "getData: ${it.data?.size}" )
                 }
                 is Resource.Error -> {
                     dialogError = showDialogError(this@MainActivity, it.message)

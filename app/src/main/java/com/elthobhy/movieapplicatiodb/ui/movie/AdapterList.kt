@@ -1,11 +1,10 @@
 package com.elthobhy.movieapplicatiodb.ui.movie
 
+import android.annotation.SuppressLint
 import android.graphics.drawable.Drawable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.recyclerview.widget.DiffUtil
-import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.Adapter
 import com.bumptech.glide.Glide
@@ -38,7 +37,7 @@ class AdapterList : Adapter<AdapterList.ViewHolder>() {
             binding.apply {
                 title.text = item.title
                 Glide.with(itemView)
-                    .load(Constants.IMAGE_LINK + item.backdrop_path)
+                    .load(Constants.IMAGE_LINK + item.backdropPath)
                     .override(800, 600)
                     .listener(object : RequestListener<Drawable> {
                         override fun onLoadFailed(
@@ -94,6 +93,7 @@ class AdapterList : Adapter<AdapterList.ViewHolder>() {
         else data.size
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     fun setData(newListData: List<DomainModel>?) {
         if (newListData == null) return
         data.clear()
