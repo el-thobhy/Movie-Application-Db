@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="title">Title</string>
+    <string name="date">Date</string>
+    <string name="image_poster">Image poster</string>
+    <string name="star">star</string>
+    <string name="star_count">Star count</string>
+    <string name="image_popularity">Image Popularity</string>
+    <string name="image_vote">Image Vote</string>
+    <string name="vote_count">Vote Count</string>
+    <string name="popularity_count">Popularity Count</string>
+    <string name="original_title">Original Title</string>
+    <string name="lorem">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec consectetur diam eget volutpat porta. Sed dictum id mi in facilisis. Suspendisse vehicula convallis efficitur. Nunc imperdiet velit ut est hendrerit, vel cursus libero pellentesque. Sed varius vel orci in finibus. Etiam eu enim justo. Duis tempor ipsum in sem aliquam, id vestibulum odio imperdiet. Curabitur condimentum sem lacus, nec mattis diam pharetra nec. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; In ac erat at lorem mattis varius. Etiam eu risus metus</string>
+    <string name="image_error">Image Error</string>
+    <string name="error">Error</string>
+    <string name="image_loading">Image Loading</string>
+    <string name="please_wait">Please Wait</string>
+</resources>
