@@ -10,4 +10,6 @@ class LocalDataSource(private val dao: Dao) {
 
     fun getDetailById(id: Int): LiveData<Entity> = dao.getDetailById(id)
     suspend fun insert(entity: List<Entity>) = dao.insert(entity)
+
+    suspend fun delete() = dao.delete()
 }

@@ -48,4 +48,8 @@ class Repository(
         }
     }
 
+    override suspend fun delete() {
+        localDataSource.delete()
+    }
+
 }

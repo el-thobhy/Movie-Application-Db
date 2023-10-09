@@ -12,4 +12,5 @@ import com.elthobhy.movieapplicationdb.core.domain.usecase.UseCase
 class MovieViewModel(private val useCase: UseCase) : ViewModel() {
     fun getMovies(cm: ConnectivityManager): LiveData<Resource<List<DomainModel>>> =
         useCase.getMovies(cm).asLiveData()
+    suspend fun delete()=useCase.delete()
 }

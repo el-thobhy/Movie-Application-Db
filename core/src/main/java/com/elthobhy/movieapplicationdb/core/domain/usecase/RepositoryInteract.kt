@@ -13,4 +13,8 @@ class RepositoryInteract(private val repository: RepositoryInterface) : UseCase 
     override fun getDetailById(id: Int): LiveData<DomainModel> =
         repository.getDetailById(id)
 
+    override suspend fun delete() {
+        repository.delete()
+    }
+
 }

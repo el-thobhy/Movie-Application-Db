@@ -17,4 +17,6 @@ interface Dao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insert(entity: List<Entity>)
 
+    @Query("DELETE FROM entity")
+    suspend fun delete()
 }

@@ -1,13 +1,19 @@
 package com.elthobhy.movieapplicatiodb.ui.movie
 
+import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
+import android.content.IntentFilter
 import android.net.ConnectivityManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
+import androidx.lifecycle.lifecycleScope
+import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.elthobhy.movieapplicatiodb.R
 import com.elthobhy.movieapplicatiodb.databinding.ActivityMainBinding
@@ -15,7 +21,10 @@ import com.elthobhy.movieapplicatiodb.ui.detail.DetailActivity
 import com.elthobhy.movieapplicatiodb.utils.showDialogError
 import com.elthobhy.movieapplicationdb.core.data.Resource
 import com.elthobhy.movieapplicationdb.core.domain.model.DomainModel
+import com.elthobhy.movieapplicationdb.core.service.MyService
 import com.elthobhy.movieapplicationdb.core.utils.Constants
+import com.google.android.material.snackbar.Snackbar
+import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MainActivity : AppCompatActivity() {
@@ -25,6 +34,20 @@ class MainActivity : AppCompatActivity() {
     private val viewModelMovie: MovieViewModel by viewModel()
     private lateinit var dialogError: AlertDialog
     private lateinit var cm: ConnectivityManager
+    private val dataUpdateReceiver = object : BroadcastReceiver(){
+        override fun onReceive(p0: Context?, p1: Intent?) {
+            lifecycleScope.launch {
+                viewModelMovie.delete()
+                Log.e("TAG check", "onReceive: database deleted" )
+            }
+            Snackbar.make(binding.root,"Old Data Have Been Deleted. New Data is Available, Click Load if data isn't showing",
+                Snackbar.LENGTH_LONG).setAction("Load") {
+                getData()
+                Toast.makeText(this@MainActivity, "Data Loaded", Toast.LENGTH_LONG).show()
+            }.show()
+            getData()
+        }
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,6 +59,12 @@ class MainActivity : AppCompatActivity() {
         checkConnection(cm)
         showRv()
         getData()
+        startService(Intent(this, MyService::class.java))
+        Handler(Looper.getMainLooper())
+            .postDelayed({
+                val intent = IntentFilter(Constants.ACTION_DATA_UPDATED)
+                LocalBroadcastManager.getInstance(this).registerReceiver(dataUpdateReceiver, intent)
+            },Constants.DIRECT_UPDATE.toLong())
     }
 
     @Suppress("DEPRECATION")

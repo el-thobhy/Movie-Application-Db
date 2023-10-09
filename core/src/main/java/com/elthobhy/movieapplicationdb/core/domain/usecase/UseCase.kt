@@ -9,4 +9,5 @@ import kotlinx.coroutines.flow.Flow
 interface UseCase {
     fun getMovies(cm: ConnectivityManager): Flow<Resource<List<DomainModel>>>
     fun getDetailById(id: Int): LiveData<DomainModel>
+    suspend fun delete()
 }
